@@ -2,7 +2,7 @@
 	"scripts": {
 		"dev": "pnpm ts-node src/app.ts",
 		"dry": "pnpm ts-node src/scripts/inject.ts --count=5 --dry",
-		"inject":  "pnpm ts-node src/scripts/inject.ts --count=1"
+		"inject":  "pnpm ts-node src/scripts/inject.ts"
 	},
 	"dependencies": {
 		"@faker-js/faker": "^8.4.1",
