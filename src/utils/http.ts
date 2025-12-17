@@ -11,7 +11,7 @@ http.interceptors.request.use((config) => {
     throw new Error('❌ CRM_TOKEN not found')
   }
 
-  console.log('➡️ Request with token')
+  // console.log('➡️ Request with token')
 
   config.headers.Authorization = `Bearer ${token}`
   return config

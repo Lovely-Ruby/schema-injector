@@ -14,7 +14,7 @@ export const CustomerCreateSchema = z.object({
     'online',
     'expo',
     'shopify',
-    'ali1688',
+    '1688',
     'email',
     'ad',
     'promotion',
