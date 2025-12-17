@@ -4,6 +4,10 @@ import { CustomerCreateSchema } from '../schema/customer.schema'
 import { generateMock } from '../mock/generate'
 import { postSequential } from '../utils/post-sequential'
 
+process.env.INJECT_RUN_ID ||= Date.now().toString()
+
+console.log('🚀 Inject run at', process.env.INJECT_RUN_ID)
+
 console.log(
   'CRM_TOKEN exists:',
   Boolean(process.env.CRM_TOKEN),

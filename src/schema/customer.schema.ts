@@ -7,6 +7,7 @@ export const CustomerCreateSchema = z.object({
   customer_type: z.enum(['domestic', 'overseas']),
 
   phone: z.string(),
+
   email: z.string().email(),
 
   source: z.enum([
@@ -19,16 +20,19 @@ export const CustomerCreateSchema = z.object({
     'promotion',
   ]),
 
-  owner_id: z.number().int(),
+  // owner_id: z.number().int(),
+  owner_id: z.enum(['184']),
 
   address: z.string(),
 
   country_code: z.string().length(2),
-  state_code: z.string(),
-  city_code: z.string(),
-  district_code: z.string(),
+  state_code: z.enum(['31']),
+  city_code: z.enum(['3101']),
+  district_code: z.enum(['310151']),
 
-  remark: z.string().optional(),
+  remark: z
+  .string()
+  .describe('faker:lorem.sentence?0.4')
 })
 
 export type CustomerCreateRequest = z.infer<
