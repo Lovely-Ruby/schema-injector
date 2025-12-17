@@ -10,7 +10,7 @@ import { postSequential } from '../utils/post-sequential'
 
 process.env.INJECT_RUN_ID ||= Date.now().toString()
 
-console.log('🚀 Inject run at', process.env.INJECT_RUN_ID)
+
 
 // ----------------------
 // config
@@ -46,15 +46,17 @@ function parseConfig(): InjectConfig {
 
 async function main() {
   const config = parseConfig()
+  console.log('\n' + '═'.repeat(80))
+  console.log('🚀  Inject run at', process.env.INJECT_RUN_ID)
+  console.log(`🎯  Target: ${config.url}`)
+  console.log(`📦  Count : ${config.count}`)
+  console.log(`🧪  Dry   : ${config.dry ? 'Yes' : 'No'}`)
+  console.log('═'.repeat(80) + '\n')
 
-  console.log('🎯 Target:', config.url)
-  console.log('📦 Count:', config.count)
-  console.log('🧪 Dry:', config.dry)
-
-  console.log(
-    'CRM_TOKEN exists:',
-    Boolean(process.env.CRM_TOKEN),
-  )
+  // console.log(
+  //   'CRM_TOKEN exists:',
+  //   Boolean(process.env.CRM_TOKEN),
+  // )
 
   const dataList = generateMock(
     CustomerCreateSchema,
@@ -67,7 +69,7 @@ async function main() {
     return
   }
 
-  console.log(`🚀 Posting to ${config.url}`)
+  // console.log(`🚀 Posting to ${config.url}`)
   await postSequential(config.url, dataList)
   console.log('✅ All customers inserted')
 }
