@@ -6,7 +6,6 @@ export function generateMock<T>(
   count: number,
 ): T[] {
   const list: T[] = []
-
   const shape = schema.shape
 
   for (let i = 0; i < count; i++) {
@@ -16,7 +15,16 @@ export function generateMock<T>(
       const field = shape[key]
 
       if (field instanceof z.ZodString) {
-        if (key.includes('email')) {
+        // ---- 特判区域 ----
+        if (key === 'country_code') {
+          item[key] = 'CN'
+        } else if (key.endsWith('_code')) {
+          item[key] = faker.number
+            .int({ min: 1, max: 999999 })
+            .toString()
+        }
+        // ---- 常规字符串 ----
+        else if (key.includes('email')) {
           item[key] = faker.internet.email()
         } else if (key.includes('phone')) {
           item[key] =
@@ -24,12 +32,12 @@ export function generateMock<T>(
             faker.number
               .int({ min: 3000000000, max: 9999999999 })
               .toString()
-        } else if (key.includes('code')) {
-          item[key] = faker.number
-            .int({ min: 1, max: 999999 })
-            .toString()
-        } else {
+        } else if (key.includes('address')) {
+          item[key] = faker.location.streetAddress()
+        } else if (key.includes('name')) {
           item[key] = faker.company.name()
+        } else {
+          item[key] = faker.lorem.words(3)
         }
       }
 
@@ -42,9 +50,8 @@ export function generateMock<T>(
       }
     }
 
-    // ✅ 再校验一次，确保绝对合法
+    // ✅ 最终兜底校验
     schema.parse(item)
-
     list.push(item)
   }
 

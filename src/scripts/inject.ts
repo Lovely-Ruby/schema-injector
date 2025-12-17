@@ -1,6 +1,13 @@
+import 'dotenv/config'
+
 import { CustomerCreateSchema } from '../schema/customer.schema'
 import { generateMock } from '../mock/generate'
-import { postSequential } from '../utils/post'
+import { postSequential } from '../utils/post-sequential'
+
+console.log(
+  'CRM_TOKEN exists:',
+  Boolean(process.env.CRM_TOKEN),
+)
 
 async function main() {
   const args = process.argv.slice(2)
@@ -10,7 +17,7 @@ async function main() {
 
   const url =
     getArg('url') ??
-    'https://crm.foremost.develop.kiyoung.cn/api/v1/customers/1'
+    'https://crm.foremost.develop.kiyoung.cn/api/v1/customers'
 
   const count = Number(getArg('count') || 1)
   const dryRun = args.includes('--dry')

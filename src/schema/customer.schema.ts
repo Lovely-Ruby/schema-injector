@@ -4,7 +4,7 @@ export const CustomerCreateSchema = z.object({
   name: z.string(),
   company_name: z.string(),
 
-  customer_type: z.enum(['domestic', 'foreign']),
+  customer_type: z.enum(['domestic', 'overseas']),
 
   phone: z.string(),
   email: z.string().email(),
