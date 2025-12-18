@@ -31,8 +31,8 @@ export const CustomerCreateSchema = z.object({
   district_code: z.enum(['310151']),
 
   remark: z
-  .string()
-  .describe('faker:lorem.sentence?0.4')
+    .string()
+    .describe('faker:lorem.sentence?0.4')
 })
 
 export type CustomerCreateRequest = z.infer<
