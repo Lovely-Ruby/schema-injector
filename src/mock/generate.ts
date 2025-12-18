@@ -18,7 +18,8 @@ export function generateMock<T>(
         // ---- 特判区域 ----
         if (key === 'country_code') {
           item[key] = 'CN'
-        } else if (key.endsWith('_code')) {
+        }
+        else if (key.endsWith('_code')) {
           item[key] = faker.number
             .int({ min: 1, max: 999999 })
             .toString()
@@ -26,17 +27,21 @@ export function generateMock<T>(
         // ---- 常规字符串 ----
         else if (key.includes('email')) {
           item[key] = faker.internet.email()
-        } else if (key.includes('phone')) {
+        }
+        else if (key.includes('phone')) {
           item[key] =
             '1' +
             faker.number
               .int({ min: 3000000000, max: 9999999999 })
               .toString()
-        } else if (key.includes('address')) {
+        }
+        else if (key.includes('address')) {
           item[key] = faker.location.streetAddress()
-        } else if (key.includes('name')) {
+        }
+        else if (key.includes('name')) {
           item[key] = faker.company.name()
-        } else {
+        }
+        else {
           item[key] = faker.lorem.words(3)
         }
       }
